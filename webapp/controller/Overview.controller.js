@@ -44,6 +44,12 @@ sap.ui.define([
                onCloseDialog: function () {
 //byId = Id im Dialog.fragment.xml.
                 this.byId("dialog").close();
+               },
+//Event bei Auswahl eines Kunden.
+               onCustomerChange: function (oEvent) {
+                var oBindingContext = 
+              oEvent.getParameter("listItem").getBindingContext();
+                this.byId("bookingTable").setBindingContext(oBindingContext);
                }
 
         });
