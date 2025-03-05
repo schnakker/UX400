@@ -15,7 +15,7 @@
             <Toolbar>
               <content>
                 <ToolbarSpacer/>
-                <Button icon="sap-icon://create-form" text="Create Customer 123"/>
+                <Button icon="sap-icon://create-form" text="Create Customer 123"  press=".onSave"/>
               </content>
             </Toolbar>
           </f:toolbar>
