@@ -13,7 +13,13 @@ sap.ui.define([
           } */
 
             onInit: function () {
-                this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
+//                this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
+//Die Zeile kann zerlegt werden in einzelne Komponeten.
+              var oOwner = this.getOwnerComponent();
+              var sClass = oOwner.getContentDensityClass();
+              var oView = this.getView();
+              oView.addStyleClass(sClass);
+
                }
 
       });
