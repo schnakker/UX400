@@ -72,19 +72,16 @@
                     "fallbackLocale": ""
                 }
             },
-            "ODataModel": {
-                "dataSource": "<...>",
+            "": {
+                "dataSource": "mainService",
                 "settings": {
                     "synchronizationMode": "None",
                     "operationMode": "Server",
                     "autoExpandSelect": true,
                     "earlyRequests": true
                 }
-            },
-            "": {
-                "type": "sap.ui.model.json.JSONModel",
-                "uri": "model/data.json"
- }
+            }
+
         },
         "resources": {
             "css": [
