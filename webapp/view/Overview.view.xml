@@ -9,11 +9,12 @@
 
 <Page title="Flight Customers">
   <content>
-    <Panel  headerText="New Customer" 
-            expandable="true" 
-            expanded="true"
+    <Panel  expandable="{= !${device>/system/desktop} }"
+            expanded="{device>/system/desktop}"
+            headerText="New Customer" 
             class="sapUiResponsiveMargin" 
-            width="auto">
+            width="auto"
+>
       <content>
         <f:SimpleForm layout="ColumnLayout" editable="true">
           <f:toolbar>
@@ -81,11 +82,12 @@
 <!-- growingThreshold="5" = Anzahl der angezeigten Zeilen. -->
       <columns>
         <Column><header><Text text="Customer Name"/></header></Column>
-        <Column><header><Text text="Street"/></header></Column>
-        <Column><header><Text text="Post Code"/></header></Column>
+        <Column minScreenWidth="Desktop"><header><Text text="Street"/></header></Column>
+        <Column minScreenWidth="Desktop"><header><Text text="Post Code"/></header></Column>
         <Column><header><Text text="City"/></header></Column>
-        <Column><header><Text text="Country"/></header></Column>
-        <Column><header><Text text="Email"/></header></Column>
+        <Column minScreenWidth="Tablet"><header><Text text="Country"/></header></Column>
+        <Column minScreenWidth="Desktop"
+                demandPopin="true"><header><Text text="Email"/></header></Column>
       </columns>
       <items>
         <ColumnListItem>
@@ -109,10 +111,14 @@
         <Column><header><Text text="Airline ID"/></header></Column>
         <Column><header><Text text="Connection Number"/></header></Column>
         <Column><header><Text text="Flight Date"/></header></Column>
-        <Column><header><Text text="Class"/></header></Column>
-        <Column><header><Text text="Foreign Currency Payment"/></header></Column>
-        <Column><header><Text text="Cancellation Status"/></header></Column>
-        <Column><header><Text text="Cancellation Status (Icon)"/></header></Column>
+        <Column minScreenWidth="Desktop" 
+                demandPopin="true"><header><Text text="Class"/></header></Column>
+        <Column minScreenWidth="Tablet" 
+                demandPopin="true"><header><Text text="Foreign Currency Payment"/></header></Column>
+        <Column minScreenWidth="Tablet" 
+                demandPopin="true"> <header><Text text="Cancellation Status"/></header></Column>
+        <Column minScreenWidth="Tablet" 
+                demandPopin="true"><header><Text text="Cancellation Status (Icon)"/></header></Column>
       </columns>
       <items>
         <ColumnListItem>
