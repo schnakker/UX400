@@ -20,7 +20,11 @@
             <Toolbar>
               <content>
                 <ToolbarSpacer/>
-                <Button icon="sap-icon://create-form" text="Create Customer"  press=".onSave"/>
+<!--ACHTUNG bei "enablbed" muss "&&"" in "&amp;&amp;"" maskiert werden.-->                
+                <Button icon="sap-icon://create-form" 
+                        text="Create Customer"  
+                        press=".onSave"
+                        enabled="{= ${customer>/CustomerName} !== undefined &amp;&amp; ${customer>/CustomerName}.length > 0 }"/>
               </content>
             </Toolbar>
           </f:toolbar>
@@ -29,7 +33,8 @@
             <Label text="Form"/>
             <Input value="{customer>/Form}" />
             <Label text="Customer Name"/>
-            <Input value="{customer>/CustomerName}" />
+            <Input  value="{customer>/CustomerName}" 
+                    valueLiveUpdate="true"/>
             <Label text="Discount"/>
             <Input value="{path: 'customer>/Discount',
                            type: 'sap.ui.model.type.Integer',
@@ -107,6 +112,7 @@
         <Column><header><Text text="Class"/></header></Column>
         <Column><header><Text text="Foreign Currency Payment"/></header></Column>
         <Column><header><Text text="Cancellation Status"/></header></Column>
+        <Column><header><Text text="Cancellation Status (Icon)"/></header></Column>
       </columns>
       <items>
         <ColumnListItem>
@@ -120,13 +126,16 @@
                                         style: 'medium' } }"/>
             <Text text="{  path: 'Class',
                            formatter: 'formatterClass.classText' }"/>
+<!--Die Währung wird beim Feld ausgeblendet und als zusätzliche Information eingeblendet.-->                           
             <ObjectNumber  number="{  parts: [  {path: 'ForeignCurrencyPayment'},
                                                 {path: 'ForeignCurrency'}],
                                       type: 'sap.ui.model.type.Currency',
                                       formatOptions: {showMeasure: false} }"
                            unit="{ForeignCurrency}"/>
-<!--Die Währung wurde beim Feld ausgeblendet und als zusätzliche Information eingeblendet.-->
+<!--Der Status wird zum besseren Verständnis doppelt angezeigt.-->
             <Text text="{IsCancelled}"/>
+            <core:Icon  src="{= ${IsCancelled} === 'X' ? 'sap-icon://cancel' : 'sap-icon://accept' }"
+                        tooltip="{= ${IsCancelled} === 'X' ? 'cancelled' : 'not cancelled' }"/>            
           </cells>
         </ColumnListItem>
       </items>
