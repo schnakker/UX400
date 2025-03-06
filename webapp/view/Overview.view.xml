@@ -52,15 +52,27 @@
         </f:SimpleForm>
       </content>
     </Panel>
-    <Table  headerText="Customers" 
+    <Table  id = "customerTable"
             growing="true" 
             growingThreshold="8"
             class="sapUiResponsiveMargin" 
             width="auto" 
-            items="{/Customers}"
+            items="{
+                    path: '/Customers',
+                    sorter: [
+                              {path: 'City', group: true},
+                              {path: 'CustomerName'} ]
+                    }"
             mode="SingleSelectLeft"
             selectionChange=".onCustomerChange"    
             >
+      <headerToolbar>
+        <Toolbar>
+          <Title text="Customers"/>
+          <ToolbarSpacer/>
+          <SearchField width="40%" search=".onFilterCustomers"/>
+        </Toolbar>
+      </headerToolbar>            
 <!-- growingThreshold="5" = Anzahl der angezeigten Zeilen. -->
       <columns>
         <Column><header><Text text="Customer Name"/></header></Column>

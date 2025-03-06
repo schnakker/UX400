@@ -1,12 +1,14 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/syncStyleClass",
-    "sap/ui/model/json/JSONModel"
+    "sap/ui/model/json/JSONModel",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, syncStyleClass, JSONModel) {
+    function (Controller, syncStyleClass, JSONModel, Filter, FilterOperator) {
         "use strict";
 
         return Controller.extend("sap.training.exc.controller.Overview", {
@@ -50,7 +52,20 @@ sap.ui.define([
                 var oBindingContext = 
               oEvent.getParameter("listItem").getBindingContext();
                 this.byId("bookingTable").setBindingContext(oBindingContext);
-               }
+               },
+//Event bei Filterm.
+               onFilterCustomers: function (oEvent) {
+                var aFilter = []; //array zur Aufnahme des Filters erstellen.
+                var sQuery = oEvent.getParameter("query"); //Wert zum Filtern übernehmen.
+//1. Prüfung: ist sQuery instanziiert?
+//2. Prüfung: hat sQuery einen Inhalt bzw. müsste hier der eigentliche Inhalt geprüft werden.                
+                if (sQuery && sQuery.length > 0) {
+                  aFilter.push(new Filter("CustomerName", FilterOperator.Contains, sQuery));
+                }
+                var oTable = this.byId("customerTable");
+                var oBinding = oTable.getBinding("items");
+                oBinding.filter(aFilter);
+               }               
 
         });
     });
