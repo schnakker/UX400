@@ -69,7 +69,7 @@
                 "settings": {
                     "bundleName": "sap.training.exc.i18n.i18n",
                     "supportedLocales": ["en","de"],
-                    "fallbackLocale": "en"
+                    "fallbackLocale": ""
                 }
             },
             "ODataModel": {
