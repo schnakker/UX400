@@ -1,15 +1,27 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
+    "sap/ui/core/mvc/Controller",
+    "sap/ui/core/routing/History"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller) {
+    function (Controller, History) {
         "use strict";
 
         return Controller.extend("sap.training.exc.controller.Detail", {
 
-
+            onNavBack: function () {
+                var oHistory = History.getInstance();
+                var sPreviousHash = oHistory.getPreviousHash();
+                if (sPreviousHash !== undefined) {
+/* Wenn es in der Historie einen Eintrag gibt, dann einfach eine Seite zurück. */
+                    window.history.go(-1);
+                } else {
+/* Ansonsten einfach zur "overview" Seite springen. */
+                    var oRouter = this.getOwnerComponent().getRouter();
+                  oRouter.navTo("overview", {}, true);
+                }
+               }
 
         });
     });
