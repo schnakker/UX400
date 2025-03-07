@@ -3,12 +3,13 @@ sap.ui.define([
     "sap/ui/core/syncStyleClass",
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
+    "sap/ui/model/FilterOperator",
+    "sap/m/MessageToast"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, syncStyleClass, JSONModel, Filter, FilterOperator) {
+    function (Controller, syncStyleClass, JSONModel, Filter, FilterOperator, MessageToast) {
         "use strict";
 
         return Controller.extend("sap.training.exc.controller.Overview", {
@@ -25,21 +26,27 @@ sap.ui.define([
            },
           
                onSave: function () {
-//Fragment wird nur instanziert, wenn es noch nicht existiert.                    
-                if (!this.pDialog) {
-                  this.pDialog = this.loadFragment({
-                    name: "sap.training.exc.view.Dialog"
-                  }).then(function (oDialog) {
+//Binding der eingegebenen Daten in der App.
+                var oModelData = this.getView().getModel("customer").getData();
+//Binding der Übersetzungen.
+                var oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
 
-//Übergeben der Conten Density Informationen an den Dialog.                    
-                  syncStyleClass(this.getOwnerComponent().getContentDensityClass(), 
-                  this.getView(), oDialog);
-                        return oDialog;
-                      }.bind(this));
-                }
-                this.pDialog.then(function (oDialog) {
-                  oDialog.open();
+                if (oModelData.Discount === undefined) { oModelData.Discount = 0; }
+//Übergeben der eingegebenen Daten an die Schnittstelle zum Speichern.
+                this.byId("customerTable").getBinding("items").create({
+                  "Form": oModelData.Form,
+                  "CustomerName": oModelData.CustomerName,
+                  "Discount": oModelData.Discount + "",
+                  "Street": oModelData.Street,
+                  "PostCode": oModelData.PostCode,
+                  "City": oModelData.City,
+                  "Country": oModelData.Country,
+                  "Email": oModelData.Email,
+                  "Telephone": oModelData.Telephone
+                }).created().then(function () {
+                  MessageToast.show(oResourceBundle.getText("customerCreatedMessage"));
                 });
+
                },
 
 //Schließen des Pop-Ups.               
