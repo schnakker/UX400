@@ -120,12 +120,12 @@
                 "viewId": "overview",
                 "viewName": "Overview",
                 "viewLevel": 1,
-                "transition": "flip" 
+                "transition": "baseSlide" 
                 },
                 "detail": {
                 "viewId": "detail",
                 "viewName": "Detail",
-                "transition": "flip"           
+                "transition": "baseSlide"           
                 }
             }
         },
