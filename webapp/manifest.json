@@ -119,12 +119,13 @@
                 "overview": {
                 "viewId": "overview",
                 "viewName": "Overview",
-                "viewLevel": 1
+                "viewLevel": 1,
+                "transition": "flip" 
                 },
                 "detail": {
                 "viewId": "detail",
                 "viewName": "Detail",
-                "viewLevel": 2
+                "transition": "flip"           
                 }
             }
         },
