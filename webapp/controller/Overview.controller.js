@@ -74,10 +74,20 @@ sap.ui.define([
                 oBinding.filter(aFilter);
                },
                
-               onNavToDetails: function () {
+               onNavToDetails: function (oEvent) {
+                var oItem = oEvent.getSource();
                 var oRouter = this.getOwnerComponent().getRouter();
-                oRouter.navTo("detail");
-               }               
+
+//SAP Lösung                  oRouter.navTo("detail", {
+//SAP Lösung                  customerId: oItem.getBindingContext().getPath().substring("/UX_Customer".length)
+//Lösung vom Dozenten. Hier werden die einzelnen Schritte einzelnd abgearbeitet.
+                var BindingContext = oItem.getBindingContext();
+                var path = BindingContext.getPath();
+                var text = path.substring("/UX_Customer".length);
+                oRouter.navTo("detail", {
+                customerId: text
+                });
+               }            
 
         });
     });
