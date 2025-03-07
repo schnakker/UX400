@@ -100,7 +100,7 @@
                 "controlId": "app",
                 "bypassed": {
                     "target": [
-                        "notFound"
+                        "tnotFound"
                     ]
                 }                
             },
@@ -133,7 +133,7 @@
                 "viewLevel": 2,                
                 "transition": "baseSlide"           
                 },
-                "notFound": {
+                "tnotFound": {
                     "viewId": "notFound",
                     "viewName": "NotFound",
                     "transition": "show"
